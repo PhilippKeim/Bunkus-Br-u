@@ -506,6 +506,42 @@
       font-size: 0.85rem;
     }
 
+    .order-form {
+      margin-top: 1.5rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      gap: 0.7rem;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .order-form label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .order-form input,
+    .order-form textarea {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(3, 6, 18, 0.9);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.85rem;
+      resize: vertical;
+      min-height: 2.4rem;
+    }
+
+    .order-form input::placeholder,
+    .order-form textarea::placeholder {
+      color: rgba(166, 174, 201, 0.6);
+    }
+
+
     .rating-form label {
       font-size: 0.8rem;
       color: var(--muted);
@@ -948,9 +984,24 @@
           Spieleabend oder einfach, weil Mittwoch ist.
         </p>
 
-        <a href="mailto:bestellung@bunkus-braeu.de?subject=Bestellung%20Bunkus%20Br%C3%A4u%20Red%20Ale&body=Hey%20Bunkus-Team%2C%0A%0Aich%20m%C3%B6chte%20gerne%20euer%20g%C3%B6ttliches%20Red%20Ale%20bestellen.%0A%0AMenge%3A%20%0AAdresse%3A%20%0A%0AOdien%20Biergr%C3%BC%C3%9Fe!" class="btn-primary">
-          Jetzt per Mail anfragen
-        </a>
+        <form class="order-form" onsubmit="event.preventDefault(); sendOrderMail();">
+          <div>
+            <label for="orderEmail">Deine E-Mail-Adresse</label>
+            <input id="orderEmail" type="email" required placeholder="du@example.com">
+          </div>
+          <div>
+            <label for="orderQuantity">Gewünschte Menge</label>
+            <input id="orderQuantity" type="text" placeholder="z. B. 12 x 0,33 l">
+          </div>
+          <div>
+            <label for="orderMessage">Nachricht an uns (optional)</label>
+            <textarea id="orderMessage" rows="3" placeholder="Lieferadresse, Wunschdatum, sonstige Infos …"></textarea>
+          </div>
+          <button type="submit" class="btn-primary">
+            Bestellung per Mail vorbereiten
+          </button>
+        </form>
+
 
         <div class="cta-mini-grid">
           <div>
@@ -1070,6 +1121,26 @@
       summary.innerHTML = "Dein Feedback wurde lokal gespeichert. Prost!";
     }
 
+    // >>> HIER ist die Funktion für das Bestell-Formular <<<
+    function sendOrderMail() {
+      const email = document.getElementById("orderEmail").value.trim();
+      const quantity = document.getElementById("orderQuantity").value.trim();
+      const message = document.getElementById("orderMessage").value.trim();
+
+      const subject = encodeURIComponent("Bestellung Bunkus Bräu Red Ale");
+      const body = encodeURIComponent(
+        "Hey Bunkus-Team,\n\n" +
+        "ich möchte gerne euer göttliches Red Ale bestellen.\n\n" +
+        "Menge: " + (quantity || "bitte mit mir abklären") + "\n" +
+        "Meine Mail-Adresse: " + email + "\n\n" +
+        "Nachricht:\n" + (message || "-") + "\n\n" +
+        "Bierige Grüße!"
+      );
+
+      window.location.href =
+        "mailto:philipp.keim2003@gmail.com?subject=" + subject + "&body=" + body;
+    }
+
     // Initial laden
     (function init() {
       const data = loadFromStorage();
@@ -1088,5 +1159,6 @@
       }
     })();
   </script>
+
 </body>
 </html>
