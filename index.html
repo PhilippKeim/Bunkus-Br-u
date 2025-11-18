@@ -343,6 +343,58 @@
       gap: 2rem;
     }
 
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .team-card {
+      border-radius: 16px;
+      background: rgba(7, 12, 32, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.9rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .team-name {
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.15rem;
+      font-size: 0.95rem;
+    }
+
+    .team-role {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(166, 174, 201, 0.9);
+      margin-bottom: 0.4rem;
+    }
+
+    .team-tagline {
+      font-size: 0.8rem;
+      color: rgba(166, 174, 201, 0.8);
+      margin-top: 0.3rem;
+    }
+
+    .team-photo {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
+      margin-bottom: 0.8rem;
+    }
+
+    .team-photo img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+
     .card {
       border-radius: var(--border-radius);
       background: var(--bg-card);
@@ -718,6 +770,7 @@
       </div>
       <nav>
         <a href="#about">Story</a>
+        <a href="#ueber-uns">Über Uns</a>
         <a href="#beer">Unser Red Ale</a>
         <a href="#rating">Bewerten</a>
         <a href="#cta">Jetzt probieren</a>
@@ -848,6 +901,109 @@
         </div>
       </div>
     </section>
+
+      <section id="ueber-uns">
+        <div class="section-inner">
+          <div class="section-kicker">Das Team</div>
+          <h2 class="section-heading">Über Uns – die Bunkus Bräu Braumeister</h2>
+          <p class="section-subtitle">
+            Wir sind vier junge Braumeister Mitte 20, mit viel Hopfen im Herzen und zu wenig Platz in der WG-Küche.
+            Aus einem Hobby-Sud mit improvisierter Kühlspirale wurde Bunkus Bräu – und ja, mindestens ein Gärfass
+            ist uns dabei schon explodiert.
+          </p>
+
+          <div class="grid-2">
+            <!-- Linke Seite: Bild + Intro -->
+            <div class="card">
+              <div class="pill">
+                <span class="pill-indicator"></span>
+                <span>Die Bunkus Gang</span>
+              </div>
+
+              <div class="team-photo">
+                <!-- Lege dieses Bild unter dem Namen "ueber-uns.jpg" in den gleichen Ordner wie die index.html -->
+                <img src="ueber-uns.jpg" alt="Braulas, Biernis, Gärlipp und Maischona – das Bunkus Bräu Team">
+              </div>
+
+              <p>
+                Von links nach rechts: <strong>Braulas</strong>, <strong>Biernis</strong>, <strong>Gärlipp</strong> und
+                <strong>Maischona</strong>. Zusammen sind wir der Grund, warum Bunkus Bräu Red Ale so göttlich schmeckt –
+                und warum unsere Nachbarn wissen, wie aktive Gärung riecht.
+              </p>
+              <p>
+                Jeder von uns hat eine eigene Spezialität am Brautag – von der Rezeptmagie über die Hopfenakrobatik
+                bis zum heiligen Moment, wenn die erste klare Probe aus dem Hahn läuft.
+              </p>
+            </div>
+
+            <!-- Rechte Seite: Rollen & Backstories -->
+            <div class="card">
+              <div class="pill">
+                <span class="pill-indicator"></span>
+                <span>Die Rollen am Brautag</span>
+              </div>
+
+              <div class="team-grid">
+                <div class="team-card">
+                  <div class="team-name">Braulas</div>
+                  <div class="team-role">Rezept-Alchemist &amp; Malz-Flüsterer</div>
+                  <p>
+                    Braulas ist der Typ, der nachts um 2 noch über Schüttungsanteile nachdenkt.
+                    Er plant die gesamte Malzkomposition, Stammwürze und Kombirasten – und weiß,
+                    wie man aus „joa ganz okay“ ein <strong>„holy shit, was ist DAS für ein Bier?“</strong> macht.
+                  </p>
+                  <p class="team-tagline">
+                    Backstory: Hat mal aus Versehen ein Bier mit Kakaonibs und Chili gebraut –
+                    seitdem nennen wir ihn liebevoll „der Wahnsinnige“.
+                  </p>
+                </div>
+
+                <div class="team-card">
+                  <div class="team-name">Biernis</div>
+                  <div class="team-role">Hopfen-Jongleur &amp; Bittere-Balancer</div>
+                  <p>
+                    Biernis ist zuständig für alles, was knusprig und hopfig ist: Wann kommt wie viel East Kent Golding
+                    in den Kessel, wie viel IBU sind noch angenehm, und wann ist der perfekte Zeitpunkt für die Aromagabe.
+                  </p>
+                  <p class="team-tagline">
+                    Backstory: Hat einmal „nur ein bisschen“ mehr Hopfen reingeschüttet –
+                    das Ergebnis war ein IPA, das dich noch drei Tage lang angeschaut hat.
+                  </p>
+                </div>
+
+                <div class="team-card">
+                  <div class="team-name">Gärlipp</div>
+                  <div class="team-role">Fermentations-Guru &amp; Qualitätskontrolle</div>
+                  <p>
+                    Gärlipp lebt für Blub-Geräusche im Gärspund. Er überwacht die Hefe, die Gärtemperatur und
+                    entscheidet, wann das Bier reif zum Cold-Crash ist. Wenn jemand mit Thermometer und Stirnlampe
+                    vorm Gärfass steht – dann er.
+                  </p>
+                  <p class="team-tagline">
+                    Backstory: Hat mal die Hefe zu früh gepitcht, während der Würze noch zu heiß war –
+                    seitdem hält er Vorträge über „Geduld ist auch ein Brau-Zutaten“.
+                  </p>
+                </div>
+
+                <div class="team-card">
+                  <div class="team-name">Maischona</div>
+                  <div class="team-role">Brewday-Operator &amp; Logistik-Legende</div>
+                  <p>
+                    Maischona kümmert sich um den kompletten Flow: Malzschroten, Läutern, Nachguss,
+                    Flaschenabfüllung, Etiketten, Social Media und meistens auch um die Playlist am Brautag.
+                    Ohne ihn wären wir nur vier Typen mit klebrigem Boden.
+                  </p>
+                  <p class="team-tagline">
+                    Backstory: Hat einmal das Brauwasser vergessen anzustellen – seitdem steht „Wasser an?“
+                    als allererster Punkt auf jeder Checkliste.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</section>
+
 
     <!-- Beer & Ingredients -->
     <section id="beer">
@@ -988,7 +1144,7 @@
         </div>
         <h2>Bereit für dein nächstes Lieblingsbier?</h2>
         <p>
-          Bunkus Bräu Red Ale gibt es in der kultigen 0,33&nbsp;l-Flasche und frisch vom Fass
+          Bunkus Bräu Red Ale gibt es in der kultigen 0,5&nbsp;l-Flasche und frisch vom Fass
           bei ausgewählten Partnern. Hol dir dein Paket für den nächsten Grillabend,
           Spieleabend oder einfach, weil Mittwoch ist.
         </p>
@@ -1152,7 +1308,7 @@
       // Lokal aktualisieren
       updatePreview(data);
       saveToStorage(data);
-      summary.innerHTML = "Dein Feedback wurde lokal gespeichert. Prost!";
+      summary.innerHTML = "Dein Feedback wurde gespeichert. Prost!";
 
       // In Firestore speichern
       try {
