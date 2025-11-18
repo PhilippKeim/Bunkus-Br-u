@@ -770,10 +770,10 @@
       </div>
       <nav>
         <a href="#about">Story</a>
-        <a href="#ueber-uns">Über Uns</a>
-        <a href="#beer">Unser Red Ale</a>
         <a href="#rating">Bewerten</a>
+        <a href="#beer">Unser Red Ale</a>
         <a href="#cta">Jetzt probieren</a>
+        <a href="#ueber-uns">Über Uns</a>
       </nav>
     </div>
   </header>
@@ -902,7 +902,189 @@
       </div>
     </section>
 
-      <section id="ueber-uns">
+    <!-- Rating / Bewertung -->
+    <section id="rating">
+      <div class="section-inner">
+        <div class="section-kicker">Deine Meinung</div>
+        <h2 class="section-heading">Bewerte Bunkus Bräu</h2>
+        <p class="section-subtitle">
+          Du hast unser Red Ale schon probiert? Dann lass uns wissen, wie göttlich du es findest.
+          Deine Bewertung bleibt lokal in deinem Browser gespeichert – ganz entspannt, ohne Account.
+        </p>
+
+        <div class="rating-wrap">
+          <div class="card">
+            <div class="pill">
+              <span class="pill-indicator"></span>
+              <span>Star-Rating</span>
+            </div>
+            <div class="rating-stars" id="ratingStars" aria-label="Bewertung in Sternen">
+              <span data-value="1">★</span>
+              <span data-value="2">★</span>
+              <span data-value="3">★</span>
+              <span data-value="4">★</span>
+              <span data-value="5">★</span>
+            </div>
+            <div class="rating-summary" id="ratingSummary">
+              Wähle eine Anzahl Sterne – 5 Sterne bedeuten: <strong>„Bier des Himmels“</strong>.
+            </div>
+            <div class="rating-note">
+              Hinweis: Deine Bewertung wird nur in deinem Browser lokal gespeichert (LocalStorage).
+            </div>
+
+            <form class="rating-form" onsubmit="event.preventDefault(); saveRatingForm();">
+              <div>
+                <label for="ratingName">Dein Name (optional)</label>
+                <input id="ratingName" type="text" placeholder="z.&nbsp;B. Durstiger Daniel">
+              </div>
+              <div>
+                <label for="ratingText">Kurzes Feedback</label>
+                <textarea id="ratingText" rows="3" placeholder="Was macht Bunkus Bräu für dich besonders?"></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Feedback merken</button>
+            </form>
+          </div>
+
+          <div class="rating-preview" id="ratingPreview">
+            <strong>Deine Bunkus-Story</strong><br />
+            Sobald du eine Bewertung und einen Kommentar eingibst, siehst du hier deine persönliche
+            Bunkus-Bräu-Notiz – perfekt, um beim nächsten Brauabend wieder nachzulesen, wie göttlich es war.
+          </div>
+        </div>
+        <div class="card" style="margin-top: 2rem;">
+          <div class="pill">
+            <span class="pill-indicator"></span>
+            <span>Community Bewertungen</span>
+          </div>
+          <div id="communityRatings" style="margin-top: 0.6rem; font-size: 0.9rem;">
+            Lade Community-Bewertungen ...
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Beer & Ingredients -->
+    <section id="beer">
+      <div class="section-inner">
+        <div class="section-kicker">Zutaten & Braufakten</div>
+        <h2 class="section-heading">Was Bunkus Bräu so göttlich macht</h2>
+        <p class="section-subtitle">
+          Unser Red Ale ist inspiriert von klassischen britischen Ales – aber mit deutscher Gründlichkeit
+          durchdacht. Hier siehst du, was im Glas landet.
+        </p>
+
+        <div class="card">
+          <div class="ingredients-list">
+            <div>
+              <h3>Malz & Getreide</h3>
+              <ul>
+                <li><strong>Pale Ale Malz</strong> – unsere Basis für klare Malzsüße</li>
+                <li><strong>CARAMÜNCH® I & III</strong> – geben Karamell, Brotkruste & Farbe</li>
+                <li><strong>Röstgerste</strong> – sorgt für zarte Röstaromen und rubinrote Tiefe</li>
+              </ul>
+              <p class="ingredients-tagline">
+                Zusammengerechnet ergibt das eine Stammwürze von etwa <strong>12,5 °P</strong> –
+                genau richtig für ein süffiges, session-freundliches Red Ale.
+              </p>
+            </div>
+            <div>
+              <h3>Hopfen & Hefe</h3>
+              <ul>
+                <li><strong>East Kent Golding</strong> – klassischer englischer Aromahopfen</li>
+                <li>Feine Bittere von rund <strong>25 IBU</strong> – spürbar, aber niemals brutal</li>
+                <li>Obergärige Hefe – sorgt für fruchtige Noten und weiches Mundgefühl</li>
+              </ul>
+              <p class="ingredients-tagline">
+                Nach 4 Wochen Reifezeit ist das Bier rund, ausgewogen und bereit,
+                dein neues Lieblings-Red-Ale zu werden.
+              </p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Alkohol</div>
+              <div class="stat-value">4,8 % vol</div>
+              <div>Angenehm leicht – perfekt für lange Abende.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Stammwürze</div>
+              <div class="stat-value">12,5 °P</div>
+              <div>Süffig, aber nicht klebrig. Ideal ausbalanciert.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Farbe</div>
+              <div class="stat-value">36 EBC</div>
+              <div>Rubinrote Eleganz im Glas.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">CO₂-Gehalt</div>
+              <div class="stat-value">5,0 g/L</div>
+              <div>Cremige, weiche Perlage ohne aggressives Sprudeln.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Reifezeit</div>
+              <div class="stat-value">4 Wochen</div>
+              <div>Wir lassen dem Bier die Zeit, die es braucht – und du schmeckst es.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Verkauf -->
+    <section id="cta" class="cta-section">
+      <div class="section-inner">
+        <div class="cta-badge">
+          <span class="dot"></span>
+          <span>Sei Kein Fisch, Trink Bunkus Bräu!</span>
+        </div>
+        <h2>Bereit für dein nächstes Lieblingsbier?</h2>
+        <p>
+          Bunkus Bräu Red Ale gibt es in der kultigen 0,5&nbsp;l-Flasche und frisch vom Fass
+          bei ausgewählten Partnern. Hol dir dein Paket für den nächsten Grillabend,
+          Spieleabend oder einfach, weil Mittwoch ist.
+        </p>
+
+        <form class="order-form" onsubmit="event.preventDefault(); sendOrderMail();">
+          <div>
+            <label for="orderEmail">Deine E-Mail-Adresse</label>
+            <input id="orderEmail" type="email" required placeholder="du@example.com">
+          </div>
+          <div>
+            <label for="orderQuantity">Gewünschte Menge</label>
+            <input id="orderQuantity" type="text" placeholder="z. B. 5 Liter Fass, 10 Liter Fass, 1 Kasten, etc.">
+          </div>
+          <div>
+            <label for="orderMessage">Nachricht an uns (optional)</label>
+            <textarea id="orderMessage" rows="3" placeholder="Lieferadresse, Wunschdatum, sonstige Infos …"></textarea>
+          </div>
+          <button type="submit" class="btn-primary">
+            Bestellung per Mail vorbereiten
+          </button>
+        </form>
+
+
+        <div class="cta-mini-grid">
+          <div>
+            <strong>Taproom & Tastings</strong>
+            Regelmäßige Verkostungsabende mit Brauer*innen-Talk und Blick in den Sudkessel.
+          </div>
+          <div>
+            <strong>Bunkus Box</strong>
+            Mixpaket mit Red Ale, Experiment-Suden und limitieren Kollaborationen.
+          </div>
+          <div>
+            <strong>Merch & Gläser</strong>
+            Stilvolle Gläser und Caps, damit man dir den guten Geschmack schon von weitem ansieht.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+        <section id="ueber-uns">
         <div class="section-inner">
           <div class="section-kicker">Das Team</div>
           <h2 class="section-heading">Über Uns – die Bunkus Bräu Braumeister</h2>
@@ -1004,189 +1186,8 @@
             </div>
           </div>
         </div>
-</section>
 
-
-    <!-- Beer & Ingredients -->
-    <section id="beer">
-      <div class="section-inner">
-        <div class="section-kicker">Zutaten & Braufakten</div>
-        <h2 class="section-heading">Was Bunkus Bräu so göttlich macht</h2>
-        <p class="section-subtitle">
-          Unser Red Ale ist inspiriert von klassischen britischen Ales – aber mit deutscher Gründlichkeit
-          durchdacht. Hier siehst du, was im Glas landet.
-        </p>
-
-        <div class="card">
-          <div class="ingredients-list">
-            <div>
-              <h3>Malz & Getreide</h3>
-              <ul>
-                <li><strong>Pale Ale Malz</strong> – unsere Basis für klare Malzsüße</li>
-                <li><strong>CARAMÜNCH® I & III</strong> – geben Karamell, Brotkruste & Farbe</li>
-                <li><strong>Röstgerste</strong> – sorgt für zarte Röstaromen und rubinrote Tiefe</li>
-              </ul>
-              <p class="ingredients-tagline">
-                Zusammengerechnet ergibt das eine Stammwürze von etwa <strong>12,5 °P</strong> –
-                genau richtig für ein süffiges, session-freundliches Red Ale.
-              </p>
-            </div>
-            <div>
-              <h3>Hopfen & Hefe</h3>
-              <ul>
-                <li><strong>East Kent Golding</strong> – klassischer englischer Aromahopfen</li>
-                <li>Feine Bittere von rund <strong>25 IBU</strong> – spürbar, aber niemals brutal</li>
-                <li>Obergärige Hefe – sorgt für fruchtige Noten und weiches Mundgefühl</li>
-              </ul>
-              <p class="ingredients-tagline">
-                Nach 4 Wochen Reifezeit ist das Bier rund, ausgewogen und bereit,
-                dein neues Lieblings-Red-Ale zu werden.
-              </p>
-            </div>
-          </div>
-
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-label">Alkohol</div>
-              <div class="stat-value">4,8 % vol</div>
-              <div>Angenehm leicht – perfekt für lange Abende.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Stammwürze</div>
-              <div class="stat-value">12,5 °P</div>
-              <div>Süffig, aber nicht klebrig. Ideal ausbalanciert.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Farbe</div>
-              <div class="stat-value">36 EBC</div>
-              <div>Rubinrote Eleganz im Glas.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">CO₂-Gehalt</div>
-              <div class="stat-value">5,0 g/L</div>
-              <div>Cremige, weiche Perlage ohne aggressives Sprudeln.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Reifezeit</div>
-              <div class="stat-value">4 Wochen</div>
-              <div>Wir lassen dem Bier die Zeit, die es braucht – und du schmeckst es.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Rating / Bewertung -->
-    <section id="rating">
-      <div class="section-inner">
-        <div class="section-kicker">Deine Meinung</div>
-        <h2 class="section-heading">Bewerte Bunkus Bräu</h2>
-        <p class="section-subtitle">
-          Du hast unser Red Ale schon probiert? Dann lass uns wissen, wie göttlich du es findest.
-          Deine Bewertung bleibt lokal in deinem Browser gespeichert – ganz entspannt, ohne Account.
-        </p>
-
-        <div class="rating-wrap">
-          <div class="card">
-            <div class="pill">
-              <span class="pill-indicator"></span>
-              <span>Star-Rating</span>
-            </div>
-            <div class="rating-stars" id="ratingStars" aria-label="Bewertung in Sternen">
-              <span data-value="1">★</span>
-              <span data-value="2">★</span>
-              <span data-value="3">★</span>
-              <span data-value="4">★</span>
-              <span data-value="5">★</span>
-            </div>
-            <div class="rating-summary" id="ratingSummary">
-              Wähle eine Anzahl Sterne – 5 Sterne bedeuten: <strong>„Bier des Himmels“</strong>.
-            </div>
-            <div class="rating-note">
-              Hinweis: Deine Bewertung wird nur in deinem Browser lokal gespeichert (LocalStorage).
-            </div>
-
-            <form class="rating-form" onsubmit="event.preventDefault(); saveRatingForm();">
-              <div>
-                <label for="ratingName">Dein Name (optional)</label>
-                <input id="ratingName" type="text" placeholder="z.&nbsp;B. Durstiger Daniel">
-              </div>
-              <div>
-                <label for="ratingText">Kurzes Feedback</label>
-                <textarea id="ratingText" rows="3" placeholder="Was macht Bunkus Bräu für dich besonders?"></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Feedback merken</button>
-            </form>
-          </div>
-
-          <div class="rating-preview" id="ratingPreview">
-            <strong>Deine Bunkus-Story</strong><br />
-            Sobald du eine Bewertung und einen Kommentar eingibst, siehst du hier deine persönliche
-            Bunkus-Bräu-Notiz – perfekt, um beim nächsten Brauabend wieder nachzulesen, wie göttlich es war.
-          </div>
-        </div>
-        <div class="card" style="margin-top: 2rem;">
-          <div class="pill">
-            <span class="pill-indicator"></span>
-            <span>Community Bewertungen</span>
-          </div>
-          <div id="communityRatings" style="margin-top: 0.6rem; font-size: 0.9rem;">
-            Lade Community-Bewertungen ...
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA / Verkauf -->
-    <section id="cta" class="cta-section">
-      <div class="section-inner">
-        <div class="cta-badge">
-          <span class="dot"></span>
-          <span>Sei Kein Fisch, Trink Bunkus Bräu!</span>
-        </div>
-        <h2>Bereit für dein nächstes Lieblingsbier?</h2>
-        <p>
-          Bunkus Bräu Red Ale gibt es in der kultigen 0,5&nbsp;l-Flasche und frisch vom Fass
-          bei ausgewählten Partnern. Hol dir dein Paket für den nächsten Grillabend,
-          Spieleabend oder einfach, weil Mittwoch ist.
-        </p>
-
-        <form class="order-form" onsubmit="event.preventDefault(); sendOrderMail();">
-          <div>
-            <label for="orderEmail">Deine E-Mail-Adresse</label>
-            <input id="orderEmail" type="email" required placeholder="du@example.com">
-          </div>
-          <div>
-            <label for="orderQuantity">Gewünschte Menge</label>
-            <input id="orderQuantity" type="text" placeholder="z. B. 5 Liter Fass, 10 Liter Fass, 1 Kasten, etc.">
-          </div>
-          <div>
-            <label for="orderMessage">Nachricht an uns (optional)</label>
-            <textarea id="orderMessage" rows="3" placeholder="Lieferadresse, Wunschdatum, sonstige Infos …"></textarea>
-          </div>
-          <button type="submit" class="btn-primary">
-            Bestellung per Mail vorbereiten
-          </button>
-        </form>
-
-
-        <div class="cta-mini-grid">
-          <div>
-            <strong>Taproom & Tastings</strong>
-            Regelmäßige Verkostungsabende mit Brauer*innen-Talk und Blick in den Sudkessel.
-          </div>
-          <div>
-            <strong>Bunkus Box</strong>
-            Mixpaket mit Red Ale, Experiment-Suden und limitieren Kollaborationen.
-          </div>
-          <div>
-            <strong>Merch & Gläser</strong>
-            Stilvolle Gläser und Caps, damit man dir den guten Geschmack schon von weitem ansieht.
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+  </section>
 
   <footer>
     &copy; <span id="year"></span> Bunkus Bräu – Handgebraute Glücksmomente im Glas.
