@@ -967,6 +967,15 @@
             Bunkus-Bräu-Notiz – perfekt, um beim nächsten Brauabend wieder nachzulesen, wie göttlich es war.
           </div>
         </div>
+        <div class="card" style="margin-top: 2rem;">
+          <div class="pill">
+            <span class="pill-indicator"></span>
+            <span>Community Bewertungen</span>
+          </div>
+          <div id="communityRatings" style="margin-top: 0.6rem; font-size: 0.9rem;">
+            Lade Community-Bewertungen ...
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1026,11 +1035,28 @@
     <span class="slogan">Sei Kein Fisch, Trink Bunkus Bräu!</span>
   </footer>
 
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+
   <script>
+    // === Firebase Setup ===
+    const firebaseConfig = {
+      apiKey: "AIzaSyDv4v-ZgkjKNBRP1Clvit9waLxd_Qq1NmE",
+      authDomain: "bunkus-braeu.firebaseapp.com",
+      projectId: "bunkus-braeu",
+      storageBucket: "bunkus-braeu.firebasestorage.app",
+      messagingSenderId: "338006467550",
+      appId: "1:338006467550:web:e272db633d71fc4076b34f"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
     // Jahr im Footer setzen
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Star-Rating Logik
+    // Star-Rating Logik (lokal + Anzeige)
     const stars = document.querySelectorAll("#ratingStars span");
     const summary = document.getElementById("ratingSummary");
     const preview = document.getElementById("ratingPreview");
@@ -1109,36 +1135,94 @@
       });
     });
 
-    function saveRatingForm() {
+    // Formular-Submit: lokal speichern + in Firebase schreiben
+    async function saveRatingForm() {
       const current = loadFromStorage() || {};
-      const data = {
-        rating: current.rating || 0,
-        name: nameInput.value,
-        text: textInput.value
-      };
+      const rating = current.rating || 0;
+      const name = nameInput.value.trim();
+      const text = textInput.value.trim();
+
+      if (!rating) {
+        alert("Bitte gib zuerst eine Sterne-Bewertung ab.");
+        return;
+      }
+
+      const data = { rating, name, text };
+
+      // Lokal aktualisieren
       updatePreview(data);
       saveToStorage(data);
       summary.innerHTML = "Dein Feedback wurde lokal gespeichert. Prost!";
+
+      // In Firestore speichern
+      try {
+        await db.collection("ratings").add({
+          name: name || null,
+          rating: rating,
+          comment: text || null,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // Community-Liste neu laden
+        await loadCommunityRatings();
+      } catch (error) {
+        console.error("Fehler beim Speichern in Firebase:", error);
+        alert("Dein Feedback wurde lokal gespeichert, aber nicht online. Versuche es später nochmal.");
+      }
     }
 
-    // >>> HIER ist die Funktion für das Bestell-Formular <<<
-    function sendOrderMail() {
-      const email = document.getElementById("orderEmail").value.trim();
-      const quantity = document.getElementById("orderQuantity").value.trim();
-      const message = document.getElementById("orderMessage").value.trim();
+    // Community-Bewertungen laden und anzeigen
+    async function loadCommunityRatings() {
+      const box = document.getElementById("communityRatings");
+      if (!box) return;
 
-      const subject = encodeURIComponent("Bestellung Bunkus Bräu Red Ale");
-      const body = encodeURIComponent(
-        "Hey Bunkus-Team,\n\n" +
-        "ich möchte gerne euer göttliches Red Ale bestellen.\n\n" +
-        "Menge: " + (quantity || "bitte mit mir abklären") + "\n" +
-        "Meine Mail-Adresse: " + email + "\n\n" +
-        "Nachricht:\n" + (message || "-") + "\n\n" +
-        "Bierige Grüße!"
-      );
+      box.textContent = "Lade Community-Bewertungen ...";
 
-      window.location.href =
-        "mailto:philipp.keim2003@gmail.com?subject=" + subject + "&body=" + body;
+      try {
+        const snapshot = await db.collection("ratings")
+          .orderBy("createdAt", "desc")
+          .limit(20)
+          .get();
+
+        if (snapshot.empty) {
+          box.textContent = "Noch keine öffentlichen Bewertungen – sei der/die Erste!";
+          return;
+        }
+
+        const data = snapshot.docs.map(doc => doc.data());
+
+        // Durchschnitt berechnen
+        const avg = data.reduce((sum, entry) => sum + (entry.rating || 0), 0) / data.length;
+        const avgRounded = avg.toFixed(1);
+
+        let html = "";
+        html += "<p><strong>Durchschnitt:</strong> " + avgRounded +
+          " von 5 Sternen (" + data.length + " Bewertungen)</p>";
+
+        html += "<ul style='list-style:none; padding-left:0; margin-top:0.8rem;'>";
+
+        data.forEach(entry => {
+          const stars = "★".repeat(entry.rating || 0) + "☆".repeat(5 - (entry.rating || 0));
+          const name = entry.name || "Anonym";
+          const comment = entry.comment || "";
+          const createdAt = entry.createdAt && entry.createdAt.toDate ? entry.createdAt.toDate() : null;
+          const date = createdAt ? createdAt.toLocaleDateString("de-DE") : "";
+
+          html += "<li style='margin-bottom:0.7rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem;'>";
+          html += "<div style='font-size:0.8rem; opacity:0.8;'>" + stars + " – " + name + (date ? " · " + date : "") + "</div>";
+          if (comment) {
+            html += "<div style='margin-top:0.2rem;'>" + comment + "</div>";
+          }
+          html += "</li>";
+        });
+
+        html += "</ul>";
+
+        box.innerHTML = html;
+      } catch (err) {
+        console.error("Fehler beim Laden der Community-Bewertungen:", err);
+        box.textContent = "Ein Fehler ist aufgetreten.";
+      }
     }
 
     // Initial laden
@@ -1157,7 +1241,30 @@
         renderStars(0);
         updatePreview(null);
       }
+
+      // Community-Bewertungen beim Laden holen
+      loadCommunityRatings();
     })();
+
+    // Bestell-Formular (wie vorher)
+    function sendOrderMail() {
+      const email = document.getElementById("orderEmail").value.trim();
+      const quantity = document.getElementById("orderQuantity").value.trim();
+      const message = document.getElementById("orderMessage").value.trim();
+
+      const subject = encodeURIComponent("Bestellung Bunkus Bräu Red Ale");
+      const body = encodeURIComponent(
+        "Hey Bunkus-Team,\n\n" +
+        "ich möchte gerne euer göttliches Red Ale bestellen.\n\n" +
+        "Menge: " + (quantity || "bitte mit mir abklären") + "\n" +
+        "Meine Mail-Adresse: " + email + "\n\n" +
+        "Nachricht:\n" + (message || "-") + "\n\n" +
+        "Bierige Grüße!"
+      );
+
+      window.location.href =
+        "mailto:philipp.keim2003@gmail.com?subject=" + subject + "&body=" + body;
+    }
   </script>
 
 </body>
