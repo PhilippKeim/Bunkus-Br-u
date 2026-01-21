@@ -1,1145 +1,692 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bunkus Bräu – Red Ale</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Bunkus Bräu – das göttliche Red Ale. Sei kein Fisch, trink Bunkus Bräu!" />
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Bunkus Bräu Red Ale – rubinrot, malzig, fruchtig. Sei kein Fisch, trink Bunkus Bräu!" />
 
   <style>
-    :root {
-      --bg-dark: #050814;
-      --bg-card: rgba(10, 15, 30, 0.9);
-      --primary: #f05a28;
-      --primary-soft: rgba(240, 90, 40, 0.2);
-      --accent: #ffcf66;
-      --text: #f7f7ff;
-      --muted: #a6aec9;
-      --border-radius: 18px;
-      --max-width: 1100px;
+    :root{
+      --bg:#070a16;
+      --bg2:#060818;
+      --card:rgba(7,12,32,.92);
+      --text:#eef1ff;
+      --muted:rgba(166,174,201,.88);
+      --accent:#ff7a18;
+      --accent2:#ffcf66;
+      --line:rgba(255,255,255,.12);
+      --shadow:0 18px 45px rgba(0,0,0,.65);
+      --radius:18px;
     }
 
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at top, #151b35 0, #050814 55%, #000 100%);
-      background-attachment: fixed;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* --- Navbar --- */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(90deg, rgba(5, 8, 20, 0.96), rgba(5, 8, 20, 0.7));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0.7rem 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-    }
-
-    .logo-badge {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      background: radial-gradient(circle at 30% 0, #ffecd2 0, #f05a28 45%, #8a1f52 100%);
-      box-shadow: 0 0 18px rgba(240, 90, 40, 0.7);
-    }
-
-    nav {
-      display: flex;
-      gap: 1.2rem;
-      font-size: 0.85rem;
-    }
-
-    nav a {
-      position: relative;
-      color: var(--muted);
-      padding-bottom: 2px;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), var(--primary));
-      transition: width 0.2s ease-out;
-    }
-
-    nav a:hover {
-      color: var(--text);
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* --- Hero --- */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 2.5rem;
-      align-items: center;
-      padding: 5.5rem 1.6rem 4rem;
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .hero-copy h1 {
-      font-size: clamp(2.6rem, 4vw, 3.6rem);
-      margin: 0 0 0.5rem;
-      line-height: 1.05;
-    }
-
-    .hero-highlight {
-      display: inline-block;
-      background: linear-gradient(120deg, var(--accent), #ffffff, var(--primary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.2rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 0.9rem;
-      color: var(--muted);
-      background: rgba(5, 8, 20, 0.7);
-    }
-
-    .hero-tag span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 0, #fff4d5 0, var(--accent) 40%, var(--primary) 100%);
-      box-shadow: 0 0 10px rgba(255, 207, 102, 0.7);
-    }
-
-    .hero-subtitle {
-      margin: 0 0 1.3rem;
-      color: var(--muted);
-      font-weight: 300;
-      max-width: 27rem;
-      font-size: 0.95rem;
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      align-items: center;
-      margin-bottom: 1.2rem;
-    }
-
-    .btn-primary,
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 0.7rem 1.3rem;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #ff7b54);
-      color: #fff;
-      box-shadow: 0 10px 25px rgba(240, 90, 40, 0.5);
-      transform: translateY(0);
-      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 40px rgba(240, 90, 40, 0.7);
-    }
-
-    .btn-ghost {
-      background: rgba(14, 23, 52, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: var(--muted);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem 1.6rem;
-      margin-top: 1.4rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .hero-meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    .hero-meta-label {
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      color: rgba(166, 174, 201, 0.9);
-    }
-
-    .hero-meta-value {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    /* Image side */
-    .hero-photo-wrap {
-      position: relative;
-    }
-
-    .hero-photo-main {
-      position: relative;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 2px solid rgba(255, 255, 255, 0.18);
-      box-shadow:
-        0 24px 60px rgba(0, 0, 0, 0.8),
-        0 0 80px rgba(64, 179, 255, 0.4);
-      transform: translateY(0);
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    }
-
-    .hero-photo-main img {
-      display: block;
-      width: 100%;
-      height: auto;
-      transform: scale(1.03);
-    }
-
-    .hero-photo-main:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.9),
-        0 0 110px rgba(203, 241, 255, 0.7);
-    }
-
-    .hero-photo-tag {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -1.4rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(5, 8, 20, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.7rem;
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
-    }
-
-    .hero-photo-tag span.highlight {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .hero-photo-blob {
-      position: absolute;
-      inset: -12%;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
       background:
-        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.12), transparent 55%),
-        radial-gradient(circle at 80% 0%, rgba(64, 179, 255, 0.3), transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(240, 90, 40, 0.4), transparent 55%);
-      filter: blur(10px);
-      opacity: 0.8;
-      z-index: -1;
+        radial-gradient(1200px 800px at 20% -10%, rgba(255,122,24,.18), transparent 60%),
+        radial-gradient(900px 700px at 85% 10%, rgba(255,207,102,.12), transparent 55%),
+        radial-gradient(900px 900px at 30% 110%, rgba(122,86,255,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .container{max-width:1100px; margin:0 auto; padding:0 18px;}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(7,10,22,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.02em;
+    }
+    .brand-badge{
+      width:34px; height:34px; border-radius:12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(255,122,24,.95), rgba(255,207,102,.85));
+      color:#140a02;
+      box-shadow: 0 10px 25px rgba(255,122,24,.20);
+      font-weight:900;
+    }
+
+    nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end;}
+    nav a{
+      font-size:.85rem;
+      padding:.45rem .65rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(3,6,18,.45);
+      text-decoration:none;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+    nav a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,122,24,.45);
+      background: rgba(255,122,24,.10);
+    }
+
+    /* Hero */
+    .hero{
+      padding:34px 0 20px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr; }
+      nav{justify-content:flex-start}
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:.85rem;
+      color:rgba(255,255,255,.78);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;background:var(--accent);
+      box-shadow: 0 0 0 6px rgba(255,122,24,.15);
+    }
+    .hero h1{
+      margin:14px 0 10px;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .hero p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.6;
+      max-width: 60ch;
+    }
+
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;}
+    .btn-primary, .btn-ghost{
+      border:none;
+      border-radius: 14px;
+      padding: .75rem 1rem;
+      font-weight:700;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(255,122,24,.98), rgba(255,207,102,.90));
+      color:#120802;
+      box-shadow: 0 18px 40px rgba(255,122,24,.20);
+    }
+    .btn-primary:hover{transform: translateY(-1px); filter: brightness(1.03);}
+    .btn-ghost{
+      background: rgba(3,6,18,.55);
+      border: 1px solid rgba(255,255,255,.13);
+      color: var(--text);
+    }
+    .btn-ghost:hover{transform: translateY(-1px); border-color: rgba(255,122,24,.45);}
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      margin-top: 18px;
+    }
+    @media (max-width: 720px){
+      .stats{grid-template-columns: repeat(2, 1fr);}
+    }
+    .stat{
+      background: rgba(3,6,18,.55);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding: 12px 12px;
+    }
+    .stat .label{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.65)}
+    .stat .value{margin-top:6px; font-size:1.05rem; font-weight:800; color:rgba(255,255,255,.92)}
+
+    .hero-media{
+      border-radius: 24px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height: 380px;
+      background: rgba(0,0,0,.25);
+    }
+    .hero-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: contrast(1.03) saturate(1.05);
+    }
+    .hero-media .caption{
+      position:absolute;
+      left:14px; bottom:14px;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:.85rem;
+      color: rgba(255,255,255,.92);
     }
 
     /* Sections */
-    section {
-      padding: 4rem 1.6rem 3.5rem;
+    section{padding: 26px 0;}
+    .section-inner{padding: 18px 0;}
+    .section-kicker{
+      font-size:.85rem; letter-spacing:.12em; text-transform:uppercase;
+      color: rgba(255,255,255,.72);
+      display:flex; align-items:center; gap:10px;
+    }
+    .section-heading{
+      margin:10px 0 10px;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing:-.02em;
+    }
+    .section-subtitle{
+      margin:0 0 18px;
+      color: var(--muted);
+      line-height:1.65;
+      max-width: 80ch;
     }
 
-    .section-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .grid-2{grid-template-columns:1fr;}
     }
 
-    .section-heading {
+    .card{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.45);
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:.78rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.78);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(3,6,18,.55);
+      margin-bottom: 10px;
+    }
+    .pill-indicator{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,207,102,.95);
+      box-shadow: 0 0 0 6px rgba(255,207,102,.14);
+    }
+
+    ul.clean{margin:10px 0 0; padding-left: 18px; color: var(--muted); line-height:1.7;}
+    .highlight-row{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 820px){
+      .highlight-row{grid-template-columns: 1fr;}
+    }
+    .highlight{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(3,6,18,.55);
+      padding: 12px 12px;
+      color: rgba(255,255,255,.88);
+    }
+    .highlight b{color: var(--accent2)}
+
+    /* Rating */
+    .stars{
+      display:flex; gap:8px;
       font-size: 1.6rem;
-      margin-bottom: 0.5rem;
+      user-select:none;
+      margin: 10px 0 6px;
     }
-
-    .section-kicker {
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
+    .stars span{
+      cursor:pointer;
+      color: #444a66;
+      transition: transform .12s ease;
     }
+    .stars span:hover{transform: translateY(-1px) scale(1.03);}
 
-    .section-subtitle {
-      color: var(--muted);
-      font-size: 0.9rem;
-      max-width: 34rem;
-      margin-bottom: 2.2rem;
-    }
-
-    /* About / Story */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 2rem;
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 1rem;
-      margin-top: 1.2rem;
-    }
-
-    .team-card {
-      border-radius: 16px;
-      background: rgba(7, 12, 32, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0.9rem 1rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .team-name {
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 0.15rem;
-      font-size: 0.95rem;
-    }
-
-    .team-role {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(166, 174, 201, 0.9);
-      margin-bottom: 0.4rem;
-    }
-
-    .team-tagline {
-      font-size: 0.8rem;
-      color: rgba(166, 174, 201, 0.8);
-      margin-top: 0.3rem;
-    }
-
-    .team-photo {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.7);
-      margin-bottom: 0.8rem;
-    }
-
-    .team-photo img {
-      width: 100%;
-      display: block;
-      height: auto;
-    }
-
-
-    .card {
-      border-radius: var(--border-radius);
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 1.4rem 1.5rem;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(10, 14, 40, 0.9);
-      font-size: 0.75rem;
-      margin-bottom: 0.7rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--muted);
-    }
-
-    .pill-indicator {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .list-check {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.4rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .list-check li::before {
-      content: "✔";
-      margin-right: 0.5rem;
-      color: var(--accent);
-      font-size: 0.8rem;
-    }
-
-    .beer-notes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.9rem;
-      margin-top: 1rem;
-    }
-
-    .beer-note {
-      padding: 0.7rem 0.8rem;
+    .small-note{color: rgba(255,255,255,.62); font-size:.82rem; line-height:1.5;}
+    .field{display:grid; gap:6px; margin-top:10px;}
+    .field label{font-size:.82rem; color: var(--muted);}
+    .input, textarea{
+      width:100%;
+      padding: 10px 12px;
       border-radius: 14px;
-      background: radial-gradient(circle at top left, rgba(255, 207, 102, 0.08), transparent 55%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.8rem;
-      color: var(--muted);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(3,6,18,.90);
+      color: var(--text);
+      font-family: inherit;
+      outline:none;
     }
+    textarea{min-height: 90px; resize: vertical;}
 
-    .beer-note strong {
-      display: block;
-      color: var(--accent);
-      margin-bottom: 0.1rem;
-    }
-
-    /* Ingredients stats */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.9rem;
-      margin-top: 1.6rem;
-    }
-
-    .stat-card {
+    .rating-wrap{display:grid; gap:14px;}
+    .rating-preview{
       border-radius: 16px;
-      padding: 0.8rem 0.9rem;
-      background: rgba(7, 12, 32, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.8rem;
+      border:1px dashed rgba(255,255,255,.18);
+      padding: 12px 12px;
+      background: rgba(3,6,18,.45);
+      color: rgba(255,255,255,.88);
+      line-height:1.6;
+      min-height: 120px;
     }
 
-    .stat-label {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.6rem;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-value {
-      font-weight: 600;
-      font-size: 0.98rem;
-    }
-
-    .ingredients-list {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 1.5rem;
-      margin-top: 1.4rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .ingredients-list ul {
-      margin: 0.3rem 0 0;
-      padding-left: 1.1rem;
-    }
-
-    .ingredients-list li {
-      margin-bottom: 0.25rem;
-    }
-
-    .ingredients-tagline {
-      margin-top: 0.8rem;
-      font-size: 0.8rem;
-      color: var(--accent);
-    }
-
-    /* Rating section */
-    .rating-wrap {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .rating-stars {
-      display: flex;
-      gap: 0.3rem;
-      font-size: 2.1rem;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .rating-stars span {
-      filter: drop-shadow(0 0 8px rgba(255, 207, 102, 0.7));
-    }
-
-    .rating-summary {
-      margin-top: 0.7rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .rating-summary strong {
-      color: var(--accent);
-    }
-
-    .rating-note {
-      font-size: 0.78rem;
-      margin-top: 0.4rem;
-      color: rgba(166, 174, 201, 0.8);
-    }
-
-    .rating-form {
+    /* CTA order form */
+    .order-form{
       margin-top: 1.2rem;
-      display: grid;
-      gap: 0.7rem;
-      font-size: 0.85rem;
+      display:grid;
+      gap:10px;
+      max-width: 520px;
     }
 
-    .order-form {
-      margin-top: 1.5rem;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-      display: grid;
-      gap: 0.7rem;
-      text-align: left;
-      font-size: 0.85rem;
-    }
-
-    .order-form label {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .order-form input,
-    .order-form textarea {
-      width: 100%;
-      padding: 0.5rem 0.6rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(3, 6, 18, 0.9);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.85rem;
-      resize: vertical;
-      min-height: 2.4rem;
-    }
-
-    .order-form input::placeholder,
-    .order-form textarea::placeholder {
-      color: rgba(166, 174, 201, 0.6);
-    }
-
-
-    .rating-form label {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .rating-form input,
-    .rating-form textarea {
-      width: 100%;
-      padding: 0.5rem 0.6rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(3, 6, 18, 0.9);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.85rem;
-      resize: vertical;
-      min-height: 2.4rem;
-    }
-
-    .rating-form input::placeholder,
-    .rating-form textarea::placeholder {
-      color: rgba(166, 174, 201, 0.6);
-    }
-
-    .rating-preview {
-      border-radius: var(--border-radius);
-      padding: 1.2rem 1.3rem;
-      background: radial-gradient(circle at top left, var(--primary-soft), transparent 60%);
-      border: 1px dashed rgba(255, 255, 255, 0.18);
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .rating-preview strong {
-      color: var(--accent);
-    }
-
-    /* CTA */
-    .cta-section {
-      text-align: center;
-      padding-bottom: 4.5rem;
-    }
-
-    .cta-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(5, 8, 20, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 0.9rem;
-    }
-
-    .cta-badge .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 0, #fff, var(--accent) 45%, var(--primary) 100%);
-      box-shadow: 0 0 12px rgba(255, 207, 102, 0.8);
-    }
-
-    .cta-section h2 {
-      margin-top: 0;
-      margin-bottom: 0.3rem;
-      font-size: 2rem;
-    }
-
-    .cta-section p {
-      margin: 0.2rem auto 1.5rem;
-      max-width: 32rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .cta-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1.4rem;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .cta-mini-grid div {
-      background: rgba(7, 12, 32, 0.95);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0.8rem 0.9rem;
-    }
-
-    .cta-mini-grid strong {
-      display: block;
-      margin-bottom: 0.15rem;
-      color: var(--accent);
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 1.3rem 1.6rem 1.8rem;
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-align: center;
-      background: rgba(3, 5, 14, 0.95);
-    }
-
-    footer span.slogan {
-      display: block;
-      margin-top: 0.4rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-    }
-
-    /* Responsive */
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 5.2rem;
-      }
-
-      .hero-photo-wrap {
-        order: -1;
-      }
-
-      .hero-photo-tag {
-        bottom: -1.1rem;
-      }
-
-      .grid-2,
-      .rating-wrap,
-      .ingredients-list {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav-inner {
-        padding-inline: 1rem;
-      }
-
-      nav {
-        display: none;
-      }
-
-      .hero {
-        padding-inline: 1.2rem;
-      }
-
-      section {
-        padding-inline: 1.2rem;
-      }
-
-      .hero-copy h1 {
-        font-size: 2.25rem;
-      }
-    }
-
-    .shop-grid {
-      display: grid;
+    /* Shop */
+    .shop-grid{
+      display:grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.4rem;
-      margin-top: 1.5rem;
+      gap:14px;
+      margin-top: 16px;
     }
-
-    .shop-card {
-      background: rgba(7, 12, 32, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
-      padding: 1.2rem;
+    .shop-card{
+      background: rgba(7,12,32,.95);
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 18px;
-      text-align: center;
+      padding: 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.45);
+      text-align:center;
       color: var(--muted);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.5);
     }
-
-    .shop-card img {
-      width: 100%;
+    .shop-card img{
+      width:100%;
       height: auto;
       border-radius: 12px;
-      margin-bottom: 0.7rem;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.15);
+      margin-bottom: 10px;
     }
+    .shop-title{color: var(--accent); font-weight: 800; margin-top:4px;}
+    .shop-price{color: rgba(255,255,255,.90); margin: 8px 0 10px; font-weight:700;}
 
-    .shop-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--accent);
+    /* Team */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
     }
+    .team-card{
+      border-radius: 16px;
+      background: rgba(3,6,18,.55);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 12px 12px;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: .9rem;
+    }
+    .team-name{color: var(--accent2); font-weight:900; font-size: 1.02rem;}
+    .team-role{margin-top:2px; font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color: rgba(255,255,255,.72);}
+    .team-tagline{margin-top:8px; font-size:.86rem; color: rgba(255,255,255,.78);}
 
-    .shop-price {
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 0.6rem;
+    .team-photo{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 14px 32px rgba(0,0,0,.60);
+      margin-bottom: 10px;
+    }
+    .team-photo img{width:100%; display:block; height:auto;}
+
+    footer{
+      padding: 26px 0 36px;
+      color: rgba(255,255,255,.68);
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 18px;
     }
   </style>
 </head>
 
 <body>
-  <!-- Top Navigation -->
   <header>
-    <div class="nav-inner">
-      <div class="logo">
-        <span class="logo-badge">BB</span>
-        <span>Bunkus Bräu</span>
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-badge">BB</div>
+          <div>Bunkus Bräu</div>
+        </div>
+
+        <!-- Reihenfolge wie auf deiner Live-Seite -->
+        <nav>
+          <a href="#shop">Shop</a>
+          <a href="#about">Story</a>
+          <a href="#rating">Bewerten</a>
+          <a href="#beer">Unser Red Ale</a>
+          <a href="#cta">Jetzt probieren</a>
+          <a href="#ueber-uns">Über Uns</a>
+        </nav>
       </div>
-      <nav>
-        <a href="#shop">Shop</a>
-        <a href="#about">Story</a>
-        <a href="#rating">Bewerten</a>
-        <a href="#beer">Unser Red Ale</a>
-        <a href="#cta">Jetzt probieren</a>
-        <a href="#ueber-uns">Über Uns</a>
-      </nav>
     </div>
   </header>
 
-  <!-- Hero: Foto direkt oben -->
   <main>
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <div class="hero-tag">
-          <span class="dot"></span>
-          <span>Red Ale · Small Batch · Handgebraut</span>
-        </div>
-        <h1>
-          <span class="hero-highlight">Sei Kein Fisch,</span><br />
-          Trink Bunkus Bräu!
-        </h1>
-        <p class="hero-subtitle">
-          Bunkus Bräu Red Ale – rubinrot im Glas, malzig, fruchtig, frech im Abgang.
-          Gebraut in kleinen Suden, damit jede Flasche schmeckt, als wäre sie nur für dich gezapft worden.
-        </p>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="dot"></span> Red Ale · Small Batch · Handgebraut</div>
+            <h1>Sei Kein Fisch,<br/>Trink Bunkus Bräu!</h1>
+            <p>
+              Bunkus Bräu Red Ale – rubinrot im Glas, malzig, fruchtig, frech im Abgang.
+              Gebraut in kleinen Suden, damit jede Flasche schmeckt, als wäre sie nur für dich gezapft worden.
+            </p>
 
-        <div class="hero-cta">
-          <a href="#cta" class="btn-primary">Bier bestellen</a>
-          <a href="#beer" class="btn-ghost">Mehr über das Red Ale</a>
-        </div>
+            <div class="cta-row">
+              <a class="btn-primary" href="#shop">Bier bestellen</a>
+              <a class="btn-ghost" href="#beer">Mehr über das Red Ale</a>
+            </div>
 
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Stil</span>
-            <span class="hero-meta-value">Irish-inspired Red Ale</span>
+            <div class="stats">
+              <div class="stat"><div class="label">Stil</div><div class="value">Irish-inspired Red Ale</div></div>
+              <div class="stat"><div class="label">Alcohol</div><div class="value">4,8 % vol</div></div>
+              <div class="stat"><div class="label">Bittere</div><div class="value">25 IBU</div></div>
+              <div class="stat"><div class="label">Farbe</div><div class="value">36 EBC · Rubinrot</div></div>
+            </div>
           </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Alcohol</span>
-            <span class="hero-meta-value">4,8 % vol</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Bittere</span>
-            <span class="hero-meta-value">25 IBU</span>
-          </div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-label">Farbe</span>
-            <span class="hero-meta-value">36 EBC · Rubinrot</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="hero-photo-wrap">
-        <div class="hero-photo-main">
-          <!-- Lege dein Foto unter diesem Namen in den gleichen Ordner wie die index.html -->
-          <img src="bunkus-braeu-hero.jpg" alt="Brauer mit Bunkus Bräu am Wasser">
-        </div>
-        <div class="hero-photo-blob"></div>
-        <div class="hero-photo-tag">
-          <span>Frisch gefangen? Nein.</span>
-          <span class="highlight">Frisch gebraut!</span>
+          <div class="hero-media">
+            <!-- Wenn du ein anderes Hero-Bild benutzt, ersetze den Dateinamen hier -->
+            <img src="bunkus-braeu-hero.jpg" alt="Brauer mit Bunkus Bräu am Wasser">
+            <div class="caption">Frisch gefangen? Nein. Frisch gebraut!</div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- SHOP -->
     <section id="shop">
-      <div class="section-inner">
-        <div class="section-kicker">Shop</div>
-        <h2 class="section-heading">Bunkus Bräu Online Shop</h2>
-        <p class="section-subtitle">
-          Hier kannst du unsere offiziellen Bunkus-Produkte bestellen – von den legendären Fässern
-          bis hin zu exklusivem Merch. Bilder folgen in Kürze!
-        </p>
+      <div class="container">
+        <div class="section-inner">
+          <div class="section-kicker"><span class="dot"></span> Shop</div>
+          <h2 class="section-heading">Bunkus Bräu Online Shop</h2>
+          <p class="section-subtitle">
+            Hier kannst du unsere offiziellen Bunkus-Produkte bestellen – von den legendären Fässern bis hin zu exklusivem Merch.
+          </p>
 
-        <div class="shop-grid">
+          <div class="shop-grid">
+            <div class="shop-card">
+              <img src="Fass.png" alt="10L Fass">
+              <div class="shop-title">10L Fass – Bunkus Bräu Red Ale</div>
+              <div class="shop-price">Preis: 32€</div>
+              <button class="btn-primary" onclick="startOrder('10L Fass – Bunkus Bräu Red Ale')">Jetzt bestellen</button>
+            </div>
 
-          <!-- 10L Fass -->
-          <div class="shop-card">
-            <img src="placeholder_10l.jpg" alt="10L Fass – Bild folgt">
-            <div class="shop-title">10L Fass – Bunkus Bräu Red Ale</div>
-            <div class="shop-price">Preis: 32€</div>
-            <button class="btn-primary" onclick="startOrder('10L Fass')">Jetzt bestellen</button>
+            <div class="shop-card">
+              <img src="5LFass.png" alt="5L Fass">
+              <div class="shop-title">5L Fass – Bunkus Bräu Red Ale</div>
+              <div class="shop-price">Preis: 19€</div>
+              <button class="btn-primary" onclick="startOrder('5L Fass – Bunkus Bräu Red Ale')">Jetzt bestellen</button>
+            </div>
+
+            <div class="shop-card">
+              <!-- Empfehlung: Datei umbenennen von Köder.png -> Koeder.png -->
+              <img src="Koeder.png" alt="Kasten / Set">
+              <div class="shop-title">Kasten Bunkus Bräu (20 x 0,5l)</div>
+              <div class="shop-price">Preis: 24€</div>
+              <button class="btn-primary" onclick="startOrder('Kasten Bunkus Bräu (20 x 0,5l)')">Jetzt bestellen</button>
+            </div>
+
+            <div class="shop-card">
+              <img src="TShirt.png" alt="T-Shirt">
+              <div class="shop-title">Bunkus Bräu Logo T-Shirt</div>
+              <div class="shop-price">Preis: 18€</div>
+              <button class="btn-primary" onclick="startOrder('Bunkus Bräu Logo T-Shirt')">Jetzt bestellen</button>
+            </div>
+
+            <div class="shop-card">
+              <img src="Glas.png" alt="Glas">
+              <div class="shop-title">Bunkus Bräu Glas mit Logo</div>
+              <div class="shop-price">Preis: 7€</div>
+              <button class="btn-primary" onclick="startOrder('Bunkus Bräu Glas mit Logo')">Jetzt bestellen</button>
+            </div>
           </div>
-
-          <!-- 5L Fass -->
-          <div class="shop-card">
-            <img src="placeholder_5l.jpg" alt="5L Fass – Bild folgt">
-            <div class="shop-title">5L Fass – Bunkus Bräu Red Ale</div>
-            <div class="shop-price">Preis: 19€</div>
-            <button class="btn-primary" onclick="startOrder('5L Fass')">Jetzt bestellen</button>
-          </div>
-
-          <!-- Kasten Bier -->
-          <div class="shop-card">
-            <img src="placeholder_kasten.jpg" alt="Kasten Bier – Bild folgt">
-            <div class="shop-title">Kasten Bunkus Bräu (20 x 0,5l)</div>
-            <div class="shop-price">Preis: 24€</div>
-            <button class="btn-primary" onclick="startOrder('Kasten Bier')">Jetzt bestellen</button>
-          </div>
-
-          <!-- T-Shirt -->
-          <div class="shop-card">
-            <img src="placeholder_shirt.jpg" alt="T-Shirt – Bild folgt">
-            <div class="shop-title">Bunkus Bräu Logo T-Shirt</div>
-            <div class="shop-price">Preis: 18€</div>
-            <button class="btn-primary" onclick="startOrder('T-Shirt')">Jetzt bestellen</button>
-          </div>
-
-          <!-- Glas -->
-          <div class="shop-card">
-            <img src="placeholder_glas.jpg" alt="Glas – Bild folgt">
-            <div class="shop-title">Bunkus Bräu Glas mit Logo</div>
-            <div class="shop-price">Preis: 7€</div>
-            <button class="btn-primary" onclick="startOrder('Glas')">Jetzt bestellen</button>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Story / About -->
+    <!-- STORY -->
     <section id="about">
-      <div class="section-inner">
-        <div class="section-kicker">Bunkus Bräu</div>
-        <h2 class="section-heading">Vom Wasser zum Wahnsinns-Bier</h2>
-        <p class="section-subtitle">
-          Alles begann mit einem Braukessel, einem See, einem sehr kleinen Fisch – und der Frage:
-          <em>Warum Wasser trinken, wenn man es in Bier verwandeln kann?</em>
-          Heute ist Bunkus Bräu eine leidenschaftliche Mikrobrauerei, die Red Ale in seiner göttlichsten Form braut.
-        </p>
+      <div class="container">
+        <div class="section-inner">
+          <div class="section-kicker"><span class="dot"></span> Bunkus Bräu</div>
+          <h2 class="section-heading">Vom Wasser zum Wahnsinns-Bier</h2>
+          <p class="section-subtitle">
+            Alles begann mit einem Braukessel, einem See, einem sehr kleinen Fisch – und der Frage:
+            Warum Wasser trinken, wenn man es in Bier verwandeln kann? Heute ist Bunkus Bräu eine leidenschaftliche
+            Mikrobrauerei, die Red Ale in seiner göttlichsten Form braut.
+          </p>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="pill">
-              <span class="pill-indicator"></span>
-              <span>Unsere Mission</span>
-            </div>
-            <p>
-              Wir wollen Bier, das mehr kann als nur Durst löschen. Bunkus Bräu Red Ale bringt:
-            </p>
-            <ul class="list-check">
-              <li>malzige Süße mit elegantem Karamell-Ton</li>
-              <li>dezente Röstnoten, die an frisches Brot erinnern</li>
-              <li>ein weiches, cremiges Mundgefühl mit moderater Bittere</li>
-              <li>einen Abgang, der nach „noch eins“ schreit</li>
-            </ul>
-            <div class="beer-notes">
-              <div class="beer-note">
-                <strong>Aroma</strong>
-                Rote Beeren, Toffee, ein Hauch Keks – wie ein Dessert, nur trinkbar.
-              </div>
-              <div class="beer-note">
-                <strong>Geschmack</strong>
-                Malz-first, noble Hopfenwürze, perfekt ausbalanciert. Einfach göttlich.
-              </div>
-              <div class="beer-note">
-                <strong>Food Pairing</strong>
-                Burger, BBQ, Tacos, Pizza – oder einfach: Sofa und gute Freunde.
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="pill">
-              <span class="pill-indicator"></span>
-              <span>Red Ale, ernst genommen</span>
-            </div>
-            <p>
-              Wir brauen mit Geduld, Handarbeit und einem Brauplan, der eher Liebeserklärung
-              als Rezept ist. Jede Charge reift vier Wochen, bis das Aroma perfekt integriert ist
-              und die Kohlensäure genau das richtige Prickeln liefert.
-            </p>
-            <p>
-              In jeder Flasche steckt:
-            </p>
-            <ul class="list-check">
-              <li>traditionelles Maischverfahren mit Kombirast</li>
-              <li>klassischer Hopfen <strong>East Kent Golding</strong> für noble Würze</li>
-              <li>Cold-Conditioning, damit dein Bier glasklar und samtig wird</li>
-            </ul>
-            <p>
-              Ergebnis: Ein Red Ale, das auch Craft-Bier-Nerds zum Lächeln bringt – und
-              gleichzeitig so unkompliziert ist, dass es deine neue Hausmarke wird.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Rating / Bewertung -->
-    <section id="rating">
-      <div class="section-inner">
-        <div class="section-kicker">Deine Meinung</div>
-        <h2 class="section-heading">Bewerte Bunkus Bräu</h2>
-        <p class="section-subtitle">
-          Du hast unser Red Ale schon probiert? Dann lass uns wissen, wie göttlich du es findest.
-          Deine Bewertung bleibt lokal in deinem Browser gespeichert – ganz entspannt, ohne Account.
-        </p>
-
-        <div class="rating-wrap">
-          <div class="card">
-            <div class="pill">
-              <span class="pill-indicator"></span>
-              <span>Star-Rating</span>
-            </div>
-            <div class="rating-stars" id="ratingStars" aria-label="Bewertung in Sternen">
-              <span data-value="1">★</span>
-              <span data-value="2">★</span>
-              <span data-value="3">★</span>
-              <span data-value="4">★</span>
-              <span data-value="5">★</span>
-            </div>
-            <div class="rating-summary" id="ratingSummary">
-              Wähle eine Anzahl Sterne – 5 Sterne bedeuten: <strong>„Bier des Himmels“</strong>.
-            </div>
-            <div class="rating-note">
-              Hinweis: Deine Bewertung wird nur in deinem Browser lokal gespeichert (LocalStorage).
-            </div>
-
-            <form class="rating-form" onsubmit="event.preventDefault(); saveRatingForm();">
-              <div>
-                <label for="ratingName">Dein Name (optional)</label>
-                <input id="ratingName" type="text" placeholder="z.&nbsp;B. Durstiger Daniel">
-              </div>
-              <div>
-                <label for="ratingText">Kurzes Feedback</label>
-                <textarea id="ratingText" rows="3" placeholder="Was macht Bunkus Bräu für dich besonders?"></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Feedback merken</button>
-            </form>
-          </div>
-
-          <div class="rating-preview" id="ratingPreview">
-            <strong>Deine Bunkus-Story</strong><br />
-            Sobald du eine Bewertung und einen Kommentar eingibst, siehst du hier deine persönliche
-            Bunkus-Bräu-Notiz – perfekt, um beim nächsten Brauabend wieder nachzulesen, wie göttlich es war.
-          </div>
-        </div>
-        <div class="card" style="margin-top: 2rem;">
-          <div class="pill">
-            <span class="pill-indicator"></span>
-            <span>Community Bewertungen</span>
-          </div>
-          <div id="communityRatings" style="margin-top: 0.6rem; font-size: 0.9rem;">
-            Lade Community-Bewertungen ...
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Beer & Ingredients -->
-    <section id="beer">
-      <div class="section-inner">
-        <div class="section-kicker">Zutaten & Braufakten</div>
-        <h2 class="section-heading">Was Bunkus Bräu so göttlich macht</h2>
-        <p class="section-subtitle">
-          Unser Red Ale ist inspiriert von klassischen britischen Ales – aber mit deutscher Gründlichkeit
-          durchdacht. Hier siehst du, was im Glas landet.
-        </p>
-
-        <div class="card">
-          <div class="ingredients-list">
-            <div>
-              <h3>Malz & Getreide</h3>
-              <ul>
-                <li><strong>Pale Ale Malz</strong> – unsere Basis für klare Malzsüße</li>
-                <li><strong>CARAMÜNCH® I & III</strong> – geben Karamell, Brotkruste & Farbe</li>
-                <li><strong>Röstgerste</strong> – sorgt für zarte Röstaromen und rubinrote Tiefe</li>
+          <div class="grid-2">
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Unsere Mission</span></div>
+              <p style="margin:0; color: var(--muted); line-height:1.7;">
+                Wir wollen Bier, das mehr kann als nur Durst löschen. Bunkus Bräu Red Ale bringt:
+              </p>
+              <ul class="clean">
+                <li>malzige Süße mit elegantem Karamell-Ton</li>
+                <li>dezente Röstnoten, die an frisches Brot erinnern</li>
+                <li>ein weiches, cremiges Mundgefühl mit moderater Bittere</li>
+                <li>einen Abgang, der nach „noch eins“ schreit</li>
               </ul>
-              <p class="ingredients-tagline">
-                Zusammengerechnet ergibt das eine Stammwürze von etwa <strong>12,5 °P</strong> –
-                genau richtig für ein süffiges, session-freundliches Red Ale.
+            </div>
+
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Highlights</span></div>
+              <div class="highlight-row">
+                <div class="highlight"><b>Aroma</b><br/>Rote Beeren, Toffee, ein Hauch Keks – wie ein Dessert, nur trinkbar.</div>
+                <div class="highlight"><b>Geschmack</b><br/>Malz-first, noble Hopfenwürze, perfekt ausbalanciert. Einfach göttlich.</div>
+                <div class="highlight"><b>Food Pairing</b><br/>Burger, BBQ, Tacos, Pizza – oder einfach: Sofa und gute Freunde.</div>
+              </div>
+
+              <p style="margin:12px 0 0; color: var(--muted); line-height:1.7;">
+                Wir brauen mit Geduld, Handarbeit und einem Brauplan, der eher Liebeserklärung als Rezept ist.
+                Jede Charge reift vier Wochen, bis Aroma &amp; Kohlensäure genau sitzen.
               </p>
             </div>
-            <div>
-              <h3>Hopfen & Hefe</h3>
-              <ul>
-                <li><strong>East Kent Golding</strong> – klassischer englischer Aromahopfen</li>
-                <li>Feine Bittere von rund <strong>25 IBU</strong> – spürbar, aber niemals brutal</li>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RATING -->
+    <section id="rating">
+      <div class="container">
+        <div class="section-inner">
+          <div class="section-kicker"><span class="dot"></span> Deine Meinung</div>
+          <h2 class="section-heading">Bewerte Bunkus Bräu</h2>
+          <p class="section-subtitle">
+            Du hast unser Red Ale schon probiert? Dann lass uns wissen, wie göttlich du es findest.
+            Deine Bewertung bleibt lokal in deinem Browser gespeichert – ganz entspannt, ohne Account.
+          </p>
+
+          <div class="rating-wrap">
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Star-Rating</span></div>
+
+              <div id="ratingStars" class="stars" aria-label="Sternebewertung">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+
+              <div id="ratingSummary" class="small-note">
+                Wähle eine Anzahl Sterne – 5 Sterne bedeuten: „Bier des Himmels“.
+              </div>
+
+              <div class="small-note" style="margin-top:8px;">
+                Hinweis: Deine Bewertung wird nur in deinem Browser lokal gespeichert (LocalStorage).
+              </div>
+
+              <div class="field">
+                <label for="ratingName">Dein Name (optional)</label>
+                <input id="ratingName" class="input" type="text" placeholder="z. B. Niklas" />
+              </div>
+
+              <div class="field">
+                <label for="ratingText">Kurzes Feedback</label>
+                <textarea id="ratingText" placeholder="Was war göttlich? Was war frech? Was war perfekt?"></textarea>
+              </div>
+
+              <div style="margin-top:12px;">
+                <button class="btn-primary" onclick="saveRatingForm()">Feedback merken</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Deine Bunkus-Story</span></div>
+              <div id="ratingPreview" class="rating-preview">
+                Sobald du eine Bewertung und einen Kommentar eingibst, siehst du hier deine persönliche
+                Bunkus-Bräu-Notiz – perfekt, um beim nächsten Brauabend wieder nachzulesen, wie göttlich es war.
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Community Bewertungen</span></div>
+              <div id="communityRatings" style="margin-top: 6px; font-size: 0.95rem; color: rgba(255,255,255,.88);">
+                Lade Community-Bewertungen ...
+              </div>
+              <div class="small-note" style="margin-top:8px;">
+                Wenn hier „Community ist noch nicht aktiv“ steht, fehlt die Firebase-Einrichtung (siehe unten im Code).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEER DETAILS -->
+    <section id="beer">
+      <div class="container">
+        <div class="section-inner">
+          <div class="section-kicker"><span class="dot"></span> Zutaten & Braufakten</div>
+          <h2 class="section-heading">Was Bunkus Bräu so göttlich macht</h2>
+          <p class="section-subtitle">
+            Unser Red Ale ist inspiriert von klassischen britischen Ales – aber mit deutscher Gründlichkeit durchdacht.
+            Hier siehst du, was im Glas landet.
+          </p>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Malz & Getreide</span></div>
+              <ul class="clean">
+                <li>Pale Ale Malz – unsere Basis für klare Malzsüße</li>
+                <li>CARAMÜNCH® I &amp; III – geben Karamell, Brotkruste &amp; Farbe</li>
+                <li>Röstgerste – sorgt für zarte Röstaromen und rubinrote Tiefe</li>
+              </ul>
+              <p style="margin:10px 0 0; color: var(--muted); line-height:1.7;">
+                Zusammengerechnet ergibt das eine Stammwürze von etwa <b>12,5 °P</b> – genau richtig für ein süffiges,
+                session-freundliches Red Ale.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="pill"><span class="pill-indicator"></span><span>Hopfen & Hefe</span></div>
+              <ul class="clean">
+                <li>East Kent Golding – klassischer englischer Aromahopfen</li>
+                <li>Feine Bittere von rund 25 IBU – spürbar, aber niemals brutal</li>
                 <li>Obergärige Hefe – sorgt für fruchtige Noten und weiches Mundgefühl</li>
               </ul>
-              <p class="ingredients-tagline">
-                Nach 4 Wochen Reifezeit ist das Bier rund, ausgewogen und bereit,
-                dein neues Lieblings-Red-Ale zu werden.
+              <p style="margin:10px 0 0; color: var(--muted); line-height:1.7;">
+                Nach 4 Wochen Reifezeit ist das Bier rund, ausgewogen und bereit, dein neues Lieblings-Red-Ale zu werden.
               </p>
             </div>
           </div>
 
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-label">Alkohol</div>
-              <div class="stat-value">4,8 % vol</div>
-              <div>Angenehm leicht – perfekt für lange Abende.</div>
+            <div class="fact-row">
+              <div class="fact">
+                <h3>Alkohol</h3>
+                <p><strong>4,8 % vol</strong></p>
+                <p>Angenehm leicht – perfekt für lange Abende.</p>
+              </div>
+              <div class="fact">
+                <h3>Stammwürze</h3>
+                <p><strong>12,5 °P</strong></p>
+                <p>Süffig, aber nicht klebrig. Ideal ausbalanciert.</p>
+              </div>
+              <div class="fact">
+                <h3>Farbe</h3>
+                <p><strong>36 EBC</strong></p>
+                <p>Rubinrote Eleganz im Glas.</p>
+              </div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">Stammwürze</div>
-              <div class="stat-value">12,5 °P</div>
-              <div>Süffig, aber nicht klebrig. Ideal ausbalanciert.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Farbe</div>
-              <div class="stat-value">36 EBC</div>
-              <div>Rubinrote Eleganz im Glas.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">CO₂-Gehalt</div>
-              <div class="stat-value">5,0 g/L</div>
-              <div>Cremige, weiche Perlage ohne aggressives Sprudeln.</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">Reifezeit</div>
-              <div class="stat-value">4 Wochen</div>
-              <div>Wir lassen dem Bier die Zeit, die es braucht – und du schmeckst es.</div>
+
+            <div class="fact-row">
+              <div class="fact">
+                <h3>CO₂-Gehalt</h3>
+                <p><strong>5,0 g/L</strong></p>
+                <p>Cremige, weiche Perlage ohne aggressives Sprudeln.</p>
+              </div>
+              <div class="fact">
+                <h3>Reifezeit</h3>
+                <p><strong>4 Wochen</strong></p>
+                <p>Wir lassen dem Bier die Zeit, die es braucht – und du schmeckst es.</p>
+              </div>
+              <div class="fact">
+                <h3>Style</h3>
+                <p><strong>Irish-inspired Red Ale</strong></p>
+                <p>Malzig, rund, mit feiner Bittere.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA / Verkauf -->
-    <section id="cta" class="cta-section">
+    <!-- CTA / Bestellung -->
+    <section id="cta" class="cta">
       <div class="section-inner">
-        <div class="cta-badge">
-          <span class="dot"></span>
-          <span>Sei Kein Fisch, Trink Bunkus Bräu!</span>
-        </div>
-        <h2>Bereit für dein nächstes Lieblingsbier?</h2>
-        <p>
-          Bunkus Bräu Red Ale gibt es in der kultigen 0,5&nbsp;l-Flasche und frisch vom Fass
-          bei ausgewählten Partnern. Hol dir dein Paket für den nächsten Grillabend,
-          Spieleabend oder einfach, weil Mittwoch ist.
+        <div class="section-kicker">Sei Kein Fisch, Trink Bunkus Bräu!</div>
+        <h2 class="section-heading">Bereit für dein nächstes Lieblingsbier?</h2>
+        <p class="section-subtitle">
+          Bunkus Bräu Red Ale gibt es in der kultigen 0,5&nbsp;l-Flasche und frisch vom Fass bei ausgewählten Partnern.
+          Hol dir dein Paket für den nächsten Grillabend, Spieleabend oder einfach, weil Mittwoch ist.
+        </p>
+
+        <p id="orderHint" style="margin-top:1.2rem; font-size:0.8rem; color:rgba(166,174,201,0.9);">
+          Wähle ein Produkt im <a href="#shop" style="color:inherit; text-decoration:underline;">Shop</a>
+          oder trage deine Bestellung hier ein.
         </p>
 
         <form class="order-form" onsubmit="event.preventDefault(); sendOrderMail();">
@@ -1149,7 +696,7 @@
           </div>
           <div>
             <label for="orderQuantity">Gewünschte Menge</label>
-            <input id="orderQuantity" type="text" placeholder="z. B. 5 Liter Fass, 10 Liter Fass, 1 Kasten, etc.">
+            <input id="orderQuantity" type="text" placeholder="z. B. 12 x 0,33 l / 1 x 10L Fass">
           </div>
           <div>
             <label for="orderMessage">Nachricht an uns (optional)</label>
@@ -1160,162 +707,143 @@
           </button>
         </form>
 
-
-        <div class="cta-mini-grid">
-          <div>
-            <strong>Taproom & Tastings</strong>
-            Regelmäßige Verkostungsabende mit Brauer*innen-Talk und Blick in den Sudkessel.
+        <div class="grid-3" style="margin-top: 1.5rem;">
+          <div class="mini-card">
+            <h3>Taproom &amp; Tastings</h3>
+            <p>Regelmäßige Verkostungsabende mit Brauer*innen-Talk und Blick in den Sudkessel.</p>
           </div>
-          <div>
-            <strong>Bunkus Box</strong>
-            Mixpaket mit Red Ale, Experiment-Suden und limitieren Kollaborationen.
+          <div class="mini-card">
+            <h3>Bunkus Box</h3>
+            <p>Mixpaket mit Red Ale, Experiment-Suden und limitierten Kollaborationen.</p>
           </div>
-          <div>
-            <strong>Merch & Gläser</strong>
-            Stilvolle Gläser und Caps, damit man dir den guten Geschmack schon von weitem ansieht.
+          <div class="mini-card">
+            <h3>Merch &amp; Gläser</h3>
+            <p>Stilvolle Gläser und Shirts, damit man dir den guten Geschmack schon von weitem ansieht.</p>
           </div>
         </div>
       </div>
     </section>
-  </main>
-    
-        <section id="ueber-uns">
-        <div class="section-inner">
-          <div class="section-kicker">Das Team</div>
-          <h2 class="section-heading">Über Uns – die Bunkus Bräu Braumeister</h2>
-          <p class="section-subtitle">
-            Wir sind vier junge Braumeister Mitte 20, mit viel Hopfen im Herzen und zu wenig Platz in der WG-Küche.
-            Aus einem Hobby-Sud mit improvisierter Kühlspirale wurde Bunkus Bräu – und ja, mindestens ein Gärfass
-            ist uns dabei schon explodiert.
-          </p>
 
-          <div class="grid-2">
-            <!-- Linke Seite: Bild + Intro -->
-            <div class="card">
-              <div class="pill">
-                <span class="pill-indicator"></span>
-                <span>Die Bunkus Gang</span>
-              </div>
+    <!-- Über Uns -->
+    <section id="ueber-uns">
+      <div class="section-inner">
+        <div class="section-kicker">Das Team</div>
+        <h2 class="section-heading">Über Uns – die Bunkus Bräu Braumeister</h2>
+        <p class="section-subtitle">
+          Wir sind vier junge Braumeister Mitte 20, mit viel Hopfen im Herzen und zu wenig Platz in der WG-Küche.
+          Aus einem Hobby-Sud mit improvisierter Kühlspirale wurde Bunkus Bräu – und ja, mindestens ein Gärfass
+          ist uns dabei schon explodiert.
+        </p>
 
-              <div class="team-photo">
-                <!-- Lege dieses Bild unter dem Namen "ueber-uns.jpg" in den gleichen Ordner wie die index.html -->
-                <img src="ueber-uns.jpg" alt="Braulas, Biernis, Gärlipp und Maischona – das Bunkus Bräu Team">
-              </div>
-
-              <p>
-                Von links nach rechts: <strong>Braulas</strong>, <strong>Biernis</strong>, <strong>Gärlipp</strong> und
-                <strong>Maischona</strong>. Zusammen sind wir der Grund, warum Bunkus Bräu Red Ale so göttlich schmeckt –
-                und warum unsere Nachbarn wissen, wie aktive Gärung riecht.
-              </p>
-              <p>
-                Jeder von uns hat eine eigene Spezialität am Brautag – von der Rezeptmagie über die Hopfenakrobatik
-                bis zum heiligen Moment, wenn die erste klare Probe aus dem Hahn läuft.
-              </p>
+        <div class="grid-2">
+          <div class="card">
+            <div class="pill">
+              <span class="pill-indicator"></span>
+              <span>Die Bunkus Gang</span>
             </div>
 
-            <!-- Rechte Seite: Rollen & Backstories -->
-            <div class="card">
-              <div class="pill">
-                <span class="pill-indicator"></span>
-                <span>Die Rollen am Brautag</span>
+            <div class="team-photo">
+              <img src="ueber-uns.jpg" alt="Braulas, Biernis, Gärlipp und Maischona – das Bunkus Bräu Team">
+            </div>
+
+            <p>
+              Von links nach rechts: <strong>Braulas</strong>, <strong>Biernis</strong>, <strong>Gärlipp</strong> und
+              <strong>Maischona</strong>. Zusammen sind wir der Grund, warum Bunkus Bräu Red Ale so göttlich schmeckt –
+              und warum unsere Nachbarn wissen, wie aktive Gärung riecht.
+            </p>
+            <p>
+              Jeder von uns hat eine eigene Spezialität am Brautag – von der Rezeptmagie über die Hopfenakrobatik
+              bis zum heiligen Moment, wenn die erste klare Probe aus dem Hahn läuft.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="pill">
+              <span class="pill-indicator"></span>
+              <span>Die Rollen am Brautag</span>
+            </div>
+
+            <div class="team-grid">
+              <div class="team-card">
+                <div class="team-name">Braulas</div>
+                <div class="team-role">Rezept-Alchemist &amp; Malz-Flüsterer</div>
+                <p>
+                  Braulas ist der Typ, der nachts um 2 noch über Schüttungsanteile nachdenkt.
+                  Er plant Malzkomposition, Stammwürze und Kombirasten – und macht aus „ok“ ein „wow“.
+                </p>
+                <p class="team-tagline">
+                  Funfact: Braulas wurde so genannt, weil er schon als Kind alles „brauals perfekt“ machen wollte –
+                  sogar sein Schulbrot. Freunde sagten: „Frag Braulas, der optimiert sogar Wasser.“
+                </p>
               </div>
 
-              <div class="team-grid">
-                <div class="team-card">
-                  <div class="team-name">Braulas</div>
-                  <div class="team-role">Rezept-Alchemist &amp; Malz-Flüsterer</div>
-                  <p>
-                    Braulas ist der Typ, der nachts um 2 noch über Schüttungsanteile nachdenkt.
-                    Er plant die gesamte Malzkomposition, Stammwürze und Kombirasten – und weiß,
-                    wie man aus „joa ganz okay“ ein <strong>„holy shit, was ist DAS für ein Bier?“</strong> macht.
-                  </p>
-                  <p class="team-tagline">
-                    Backstory: Braulas behauptet, er habe als Kind einen Müslilöffel fallen lassen – und er landete
-                    senkrecht in der Schüssel. Seitdem ist er sicher, dass höhere Mächte auf ihn aufpassen.
-                  </p>
-                </div>
+              <div class="team-card">
+                <div class="team-name">Biernis</div>
+                <div class="team-role">Hopfen-Jongleur &amp; Bittere-Balancer</div>
+                <p>
+                  Biernis ist zuständig für alles, was knusprig und hopfig ist: Timing, Balance, Aroma –
+                  und der Moment, in dem aus „würzig“ ein „genau richtig“ wird.
+                </p>
+                <p class="team-tagline">
+                  Funfact: Biernis hatte schon früher zu jedem Thema einen unnötig nützlichen Fakt parat.
+                  Seitdem nennt man solche Infos „Biernis-Fakten“. Er weiß alles – auch wenn niemand gefragt hat.
+                </p>
+              </div>
 
-                <div class="team-card">
-                  <div class="team-name">Biernis</div>
-                  <div class="team-role">Hopfen-Jongleur &amp; Bittere-Balancer</div>
-                  <p>
-                    Biernis ist zuständig für alles, was knusprig und hopfig ist: Wann kommt wie viel East Kent Golding
-                    in den Kessel, wie viel IBU sind noch angenehm, und wann ist der perfekte Zeitpunkt für die Aromagabe.
-                  </p>
-                  <p class="team-tagline">
-                    Biernis behauptet, Chips schmecken besser, wenn man sie heimlich isst.
-                    Er ist der einzige Mensch, der in einem völlig stillen Raum eine Chipstüte öffnen kann,
-                    ohne einen einzigen Ton zu machen.
-                  </p>
-                </div>
+              <div class="team-card">
+                <div class="team-name">Gärlipp</div>
+                <div class="team-role">Fermentations-Guru &amp; Qualitätskontrolle</div>
+                <p>
+                  Gärlipp lebt für Blub-Geräusche im Gärspund. Er überwacht Hefe, Temperatur und Reifezeit
+                  – und merkt zuerst, wenn ein Sud „perfekt“ ist.
+                </p>
+                <p class="team-tagline">
+                  Funfact: Gärlipp hatte schon als Kind so eine entspannte Art, dass sogar der Familienhund
+                  neben ihm eingeschlafen ist. Man sagt, seine Anwesenheit senkt Stress um 30%.
+                </p>
+              </div>
 
-                <div class="team-card">
-                  <div class="team-name">Gärlipp</div>
-                  <div class="team-role">Fermentations-Guru &amp; Qualitätskontrolle</div>
-                  <p>
-                    Gärlipp lebt für Blub-Geräusche im Gärspund. Er überwacht die Hefe, die Gärtemperatur und
-                    entscheidet, wann das Bier reif zum Cold-Crash ist. Wenn jemand mit Thermometer und Stirnlampe
-                    vorm Gärfass steht – dann er.
-                  </p>
-                  <p class="team-tagline">
-                    Backstory: Gärlipp bekam seinen Namen, weil seine Unterlippe als Baby immer gezuckt hat, sobald es donnerte.
-                    Seine Oma meinte: „Dem Bub steckt der Blitz im Blut!“ – und der Name blieb kleben.
-                  </p>
-                </div>
-
-                <div class="team-card">
-                  <div class="team-name">Maischona</div>
-                  <div class="team-role">Brewday-Operator &amp; Logistik-Legende</div>
-                  <p>
-                    Maischona kümmert sich um den kompletten Flow: Malzschroten, Läutern, Nachguss,
-                    Flaschenabfüllung, Etiketten, Social Media und meistens auch um die Playlist am Brautag.
-                    Ohne ihn wären wir nur vier Typen mit klebrigem Boden.
-                  </p>
-                  <p class="team-tagline">
-                    Backstory: Maischona bekam seinen Namen, weil er als Kind beim Fangen immer zu 100% übermotiviert war
-                    und permanent irgendwo reinrannte — Zaun, Baum, Garagentor.
-                    Er ist bis heute der Schnellste im Team… in alles hinein.
-                  </p>
-                </div>
+              <div class="team-card">
+                <div class="team-name">Maischona</div>
+                <div class="team-role">Brewday-Operator &amp; Logistik-Legende</div>
+                <p>
+                  Maischona kümmert sich um den kompletten Flow: Malzschroten, Läutern, Nachguss, Abfüllung,
+                  Etiketten, Orga – und meistens auch um die Playlist.
+                </p>
+                <p class="team-tagline">
+                  Funfact: Maischona rennt seit Kindheitstagen überall versehentlich rein – Zaun, Baum, Garagentor.
+                  Bis heute ist er der Schnellste im Team… in alles hinein.
+                </p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-  </section>
+  </main>
 
-  <footer>
-    &copy; <span id="year"></span> Bunkus Bräu – Handgebraute Glücksmomente im Glas.
-    <span class="slogan">Sei Kein Fisch, Trink Bunkus Bräu!</span>
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Bunkus Bräu – Handgebraute Glücksmomente im Glas. <strong>Sei Kein Fisch, Trink Bunkus Bräu!</strong></p>
+    </div>
   </footer>
 
+  <!-- Firebase (optional) - falls ihr es wirklich nutzen wollt, müsst ihr firebaseConfig unten füllen -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
-
   <script>
-    // === Firebase Setup ===
-    const firebaseConfig = {
-      apiKey: "AIzaSyDv4v-ZgkjKNBRP1Clvit9waLxd_Qq1NmE",
-      authDomain: "bunkus-braeu.firebaseapp.com",
-      projectId: "bunkus-braeu",
-      storageBucket: "bunkus-braeu.firebasestorage.app",
-      messagingSenderId: "338006467550",
-      appId: "1:338006467550:web:e272db633d71fc4076b34f"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    // Jahr im Footer setzen
+    // Footer Jahr
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Star-Rating Logik (lokal + Anzeige)
+    // ======= Rating (lokal) =======
     const stars = document.querySelectorAll("#ratingStars span");
     const summary = document.getElementById("ratingSummary");
     const preview = document.getElementById("ratingPreview");
     const nameInput = document.getElementById("ratingName");
     const textInput = document.getElementById("ratingText");
+    const communityBox = document.getElementById("communityRatings");
 
     const STORAGE_KEY = "bunkusBraeuRating";
 
@@ -1338,9 +866,12 @@
     }
 
     function updatePreview(data) {
+      if (!preview) return;
+
       if (!data || (!data.rating && !data.name && !data.text)) {
-        preview.innerHTML = "<strong>Deine Bunkus-Story</strong><br />" +
-          "Sobald du eine Bewertung und einen Kommentar eingibst, siehst du hier deine persönliche Notiz.";
+        preview.innerHTML =
+          "<strong>Deine Bunkus-Story</strong><br />" +
+          "Sobald du eine Bewertung und einen Kommentar eingibst, siehst du hier deine persönliche Bunkus-Bräu-Notiz – perfekt, um beim nächsten Brauabend wieder nachzulesen, wie göttlich es war.";
         return;
       }
 
@@ -1356,11 +887,8 @@
     }
 
     function saveToStorage(data) {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      } catch (e) {
-        console.warn("Konnte Bewertung nicht speichern:", e);
-      }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+      catch (e) { console.warn("Konnte Bewertung nicht speichern:", e); }
     }
 
     function loadFromStorage() {
@@ -1379,36 +907,72 @@
         const current = loadFromStorage() || {};
         const data = {
           rating: value,
-          name: nameInput.value || current.name || "",
-          text: textInput.value || current.text || ""
+          name: (nameInput && nameInput.value) || current.name || "",
+          text: (textInput && textInput.value) || current.text || ""
         };
         renderStars(value);
-        summary.innerHTML = "Du hast <strong>" + value + " von 5 Sternen</strong> vergeben. " + getRatingText(value);
+        if (summary) summary.innerHTML = "Du hast <strong>" + value + " von 5 Sternen</strong> vergeben. " + getRatingText(value);
         updatePreview(data);
         saveToStorage(data);
       });
     });
 
-    // Formular-Submit: lokal speichern + in Firebase schreiben
+    // Button "Feedback merken" ruft saveRatingForm() auf (muss in deinem HTML so verdrahtet sein)
     async function saveRatingForm() {
       const current = loadFromStorage() || {};
       const rating = current.rating || 0;
-      const name = nameInput.value.trim();
-      const text = textInput.value.trim();
+      const name = nameInput ? nameInput.value.trim() : "";
+      const text = textInput ? textInput.value.trim() : "";
 
       if (!rating) {
         alert("Bitte gib zuerst eine Sterne-Bewertung ab.");
         return;
       }
 
-      const data = { rating, name, text };
+      const localData = { rating, name, text };
+      updatePreview(localData);
+      saveToStorage(localData);
+      if (summary) summary.innerHTML = "Dein Feedback wurde lokal gespeichert. Prost!";
 
-      // Lokal aktualisieren
-      updatePreview(data);
-      saveToStorage(data);
-      summary.innerHTML = "Dein Feedback wurde gespeichert. Prost!";
+      // Optional: Online speichern (Firebase). Wenn nicht eingerichtet → sauber skippen.
+      await trySaveRatingOnline({ rating, name, text });
+    }
 
-      // In Firestore speichern
+    // ======= Firebase / Community Bewertungen (robust, kein Crash mehr) =======
+
+    // >>> Wenn ihr Firebase wirklich wollt: firebaseConfig hier eintragen! <<<
+    const firebaseConfig = {
+      apiKey: "",
+      authDomain: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: "",
+      appId: ""
+    };
+
+    let db = null;
+
+    function firebaseConfigured(cfg) {
+      return cfg && cfg.apiKey && cfg.authDomain && cfg.projectId && cfg.appId;
+    }
+
+    try {
+      if (typeof firebase !== "undefined" && firebaseConfigured(firebaseConfig)) {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+      }
+    } catch (e) {
+      console.warn("Firebase init fehlgeschlagen:", e);
+      db = null;
+    }
+
+    async function trySaveRatingOnline({ rating, name, text }) {
+      if (!db) {
+        // keine Fehlermeldung — einfach still skippen
+        await loadCommunityRatings(); // zeigt dann "offline"
+        return;
+      }
+
       try {
         await db.collection("ratings").add({
           name: name || null,
@@ -1416,21 +980,25 @@
           comment: text || null,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        // Community-Liste neu laden
         await loadCommunityRatings();
-      } catch (error) {
-        console.error("Fehler beim Speichern in Firebase:", error);
-        alert("Dein Feedback wurde lokal gespeichert, aber nicht online. Versuche es später nochmal.");
+      } catch (e) {
+        console.warn("Online-Speichern fehlgeschlagen:", e);
+        await loadCommunityRatings();
       }
     }
 
-    // Community-Bewertungen laden und anzeigen
     async function loadCommunityRatings() {
-      const box = document.getElementById("communityRatings");
-      if (!box) return;
+      if (!communityBox) return;
 
-      box.textContent = "Lade Community-Bewertungen ...";
+      // Wenn Firebase nicht aktiv ist -> freundliche Meldung statt "Ein Fehler..."
+      if (!db) {
+        communityBox.innerHTML =
+          "Community-Bewertungen sind gerade offline (Firebase nicht verbunden). " +
+          "Deine Bewertung wird weiterhin lokal in deinem Browser gespeichert.";
+        return;
+      }
+
+      communityBox.textContent = "Lade Community-Bewertungen ...";
 
       try {
         const snapshot = await db.collection("ratings")
@@ -1439,104 +1007,72 @@
           .get();
 
         if (snapshot.empty) {
-          box.textContent = "Noch keine öffentlichen Bewertungen – sei der/die Erste!";
+          communityBox.textContent = "Noch keine öffentlichen Bewertungen – sei der/die Erste!";
           return;
         }
 
-        const data = snapshot.docs.map(doc => doc.data());
-
-        // Durchschnitt berechnen
+        const data = snapshot.docs.map(d => d.data());
         const avg = data.reduce((sum, entry) => sum + (entry.rating || 0), 0) / data.length;
         const avgRounded = avg.toFixed(1);
 
         let html = "";
-        html += "<p><strong>Durchschnitt:</strong> " + avgRounded +
-          " von 5 Sternen (" + data.length + " Bewertungen)</p>";
-
+        html += "<p><strong>Durchschnitt:</strong> " + avgRounded + " von 5 Sternen (" + data.length + " Bewertungen)</p>";
         html += "<ul style='list-style:none; padding-left:0; margin-top:0.8rem;'>";
 
         data.forEach(entry => {
-          const stars = "★".repeat(entry.rating || 0) + "☆".repeat(5 - (entry.rating || 0));
-          const name = entry.name || "Anonym";
-          const comment = entry.comment || "";
+          const s = "★".repeat(entry.rating || 0) + "☆".repeat(5 - (entry.rating || 0));
+          const n = entry.name || "Anonym";
+          const c = entry.comment || "";
           const createdAt = entry.createdAt && entry.createdAt.toDate ? entry.createdAt.toDate() : null;
           const date = createdAt ? createdAt.toLocaleDateString("de-DE") : "";
 
           html += "<li style='margin-bottom:0.7rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem;'>";
-          html += "<div style='font-size:0.8rem; opacity:0.8;'>" + stars + " – " + name + (date ? " · " + date : "") + "</div>";
-          if (comment) {
-            html += "<div style='margin-top:0.2rem;'>" + comment + "</div>";
-          }
+          html += "<div style='font-size:0.8rem; opacity:0.8;'>" + s + " – " + n + (date ? " · " + date : "") + "</div>";
+          if (c) html += "<div style='margin-top:0.2rem;'>" + c + "</div>";
           html += "</li>";
         });
 
         html += "</ul>";
-
-        box.innerHTML = html;
-      } catch (err) {
-        console.error("Fehler beim Laden der Community-Bewertungen:", err);
-        box.textContent = "Ein Fehler ist aufgetreten.";
+        communityBox.innerHTML = html;
+      } catch (e) {
+        console.warn("Community-Laden fehlgeschlagen:", e);
+        communityBox.innerHTML =
+          "Community-Bewertungen konnten gerade nicht geladen werden. " +
+          "Deine Bewertung wird weiterhin lokal gespeichert.";
       }
     }
 
-    // Initial laden
-    (function init() {
-      const data = loadFromStorage();
-      if (data) {
-        if (data.rating) {
-          renderStars(data.rating);
-          summary.innerHTML = "Du hast bereits <strong>" + data.rating +
-            " von 5 Sternen</strong> vergeben. " + getRatingText(data.rating);
-        }
-        if (data.name) nameInput.value = data.name;
-        if (data.text) textInput.value = data.text;
-        updatePreview(data);
-      } else {
-        renderStars(0);
-        updatePreview(null);
-      }
-
-      // Community-Bewertungen beim Laden holen
-      loadCommunityRatings();
-    })();
+    // ======= Shop -> Formular ausfüllen =======
     function startOrder(productName) {
-      // Referenzen auf die Formular-Felder
       const quantityInput = document.getElementById("orderQuantity");
       const messageInput = document.getElementById("orderMessage");
       const hint = document.getElementById("orderHint");
 
-      if (quantityInput) {
-        // Standardmäßig 1 Stück vorausfüllen
-        quantityInput.value = "1 x " + productName;
-      }
+      if (quantityInput) quantityInput.value = "1 x " + productName;
 
       if (messageInput && !messageInput.value) {
-        // Nur wenn noch nichts drinsteht, einen kleinen Hinweis ergänzen
         messageInput.value = "Bestellung für: " + productName + "\n\nLieferadresse:\nWunschdatum:";
       }
 
-      if (hint) {
-        hint.textContent = "Du bestellst gerade: " + productName;
-      }
+      if (hint) hint.textContent = "Du bestellst gerade: " + productName;
 
-      // Zum Bestellbereich scrollen
       const ctaSection = document.getElementById("cta");
       if (ctaSection && ctaSection.scrollIntoView) {
         ctaSection.scrollIntoView({ behavior: "smooth" });
       }
     }
 
-    // Bestell-Formular (wie vorher)
+    // ======= Mail-Bestellung =======
     function sendOrderMail() {
       const email = document.getElementById("orderEmail").value.trim();
       const quantity = document.getElementById("orderQuantity").value.trim();
       const message = document.getElementById("orderMessage").value.trim();
 
-      const subject = encodeURIComponent("Bestellung Bunkus Bräu Red Ale");
+      const subject = encodeURIComponent("Bestellung Bunkus Bräu");
       const body = encodeURIComponent(
         "Hey Bunkus-Team,\n\n" +
-        "ich möchte gerne euer göttliches Red Ale bestellen.\n\n" +
-        "Menge: " + (quantity || "bitte mit mir abklären") + "\n" +
+        "ich möchte gerne bestellen:\n\n" +
+        "Menge / Produkte: " + (quantity || "bitte mit mir abklären") + "\n\n" +
         "Meine Mail-Adresse: " + email + "\n\n" +
         "Nachricht:\n" + (message || "-") + "\n\n" +
         "Bierige Grüße!"
@@ -1545,7 +1081,27 @@
       window.location.href =
         "mailto:philipp.keim2003@gmail.com?subject=" + subject + "&body=" + body;
     }
-  </script>
 
+    // Initial laden
+    (function init() {
+      const data = loadFromStorage();
+      if (data) {
+        if (data.rating) {
+          renderStars(data.rating);
+          if (summary) summary.innerHTML =
+            "Du hast bereits <strong>" + data.rating + " von 5 Sternen</strong> vergeben. " + getRatingText(data.rating);
+        }
+        if (nameInput && data.name) nameInput.value = data.name;
+        if (textInput && data.text) textInput.value = data.text;
+        updatePreview(data);
+      } else {
+        renderStars(0);
+        updatePreview(null);
+      }
+
+      loadCommunityRatings();
+    })();
+  </script>
 </body>
 </html>
+
